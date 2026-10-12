@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# SQLite Database files (generated automatically from ridecare_db.json seed)
+*.sqlite
+*.sqlite-journal
+*.sqlite-wal
+*.sqlite-shm
+data/*.sqlite
+data/*.sqlite-wal
+data/*.sqlite-shm
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# OS & Editor files
+.DS_Store
+Thumbs.db
+.vscode/

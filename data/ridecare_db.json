@@ -1,0 +1,224 @@
+{
+  "bookings": [
+    {
+      "id": "RC-3978",
+      "customer": "scriptalert('XSS')/scriptAryan Mehta",
+      "phone": "+91 98888 11111",
+      "email": "",
+      "bike": "KTM b390/b",
+      "reg": "RJ-14-RC-2025",
+      "date": "2026-09-10",
+      "timeSlot": "10:00 AM",
+      "serviceType": "Workshop Drop-off",
+      "services": [
+        "General Service"
+      ],
+      "total": 999,
+      "stage": 1,
+      "status": "Vehicle Inward & Check-in",
+      "assignedTech": "Master Tech Assigned",
+      "bay": "Bay 1 (Inspection Bay)",
+      "startTime": "Just Checked In",
+      "estimatedReady": "Estimated 3-4 Hours",
+      "notes": "img src=x onerror=alert(1)Regular service",
+      "createdAt": "2026-09-10T21:38:50.146Z",
+      "updatedAt": "2026-09-10T21:38:50.146Z"
+    },
+    {
+      "id": "RC-2554",
+      "customer": "Deepak Sharma",
+      "phone": "+91 98291 77889",
+      "email": "",
+      "bike": "Royal Enfield Hunter 350",
+      "reg": "RJ-14-HN-3322",
+      "date": "2026-09-10",
+      "timeSlot": "10:00 AM",
+      "serviceType": "Workshop Drop-off",
+      "services": [
+        "General Service",
+        "Brake Overhaul"
+      ],
+      "total": 1699,
+      "stage": 4,
+      "status": "Quality Inspection & Dyno Test",
+      "assignedTech": "Master Tech Vikram S.",
+      "bay": "Bay 1 (Inspection Bay)",
+      "startTime": "Just Checked In",
+      "estimatedReady": "Estimated 3-4 Hours",
+      "notes": "Hunter 350 oil replaced, brake pads bedded-in. Passing 40-point safety checklist.",
+      "createdAt": "2026-09-10T21:03:35.744Z",
+      "updatedAt": "2026-09-10T21:03:35.750Z"
+    },
+    {
+      "id": "RC-8646",
+      "customer": "Deepak Sharma",
+      "phone": "+91 98291 77889",
+      "email": "",
+      "bike": "Royal Enfield Hunter 350",
+      "reg": "RJ-14-HN-3322",
+      "date": "2026-09-10",
+      "timeSlot": "10:00 AM",
+      "serviceType": "Workshop Drop-off",
+      "services": [
+        "General Service",
+        "Brake Overhaul"
+      ],
+      "total": 1699,
+      "stage": 4,
+      "status": "Quality Inspection & Dyno Test",
+      "assignedTech": "Master Tech Vikram S.",
+      "bay": "Bay 1 (Inspection Bay)",
+      "startTime": "Just Checked In",
+      "estimatedReady": "Estimated 3-4 Hours",
+      "notes": "Hunter 350 oil replaced, brake pads bedded-in. Passing 40-point safety checklist.",
+      "createdAt": "2026-09-10T21:03:20.353Z",
+      "updatedAt": "2026-09-10T21:03:20.356Z"
+    },
+    {
+      "id": "RC-5868",
+      "customer": "Rohit Verma",
+      "phone": "+91 99887 66554",
+      "email": "",
+      "bike": "KTM RC 390",
+      "reg": "RJ-14-RC-9988",
+      "date": "2026-09-10",
+      "timeSlot": "10:00 AM",
+      "serviceType": "Workshop Drop-off",
+      "services": [
+        "General Service",
+        "Motul Synthetic Oil"
+      ],
+      "total": 2199,
+      "stage": 3,
+      "status": "Active Servicing & Spares Replacement",
+      "assignedTech": "Performance Tech Manoj K.",
+      "bay": "Bay 1 (Inspection Bay)",
+      "startTime": "Just Checked In",
+      "estimatedReady": "Estimated 3-4 Hours",
+      "notes": "Synthetic oil replaced, spark plug cleaned.",
+      "createdAt": "2026-09-10T21:01:32.952Z",
+      "updatedAt": "2026-09-10T21:01:45.162Z"
+    },
+    {
+      "id": "RC-1001",
+      "bike": "Royal Enfield Classic 350",
+      "reg": "RJ-14-EF-4521",
+      "customer": "Suresh Chauhan",
+      "phone": "+91 98290 11234",
+      "email": "suresh.c@gmail.com",
+      "serviceType": "Workshop Drop-off",
+      "services": [
+        "General Periodic Service",
+        "Brake Pad Replacement",
+        "Chain Tensioning & Lube"
+      ],
+      "total": 1847,
+      "stage": 4,
+      "status": "Quality Inspection & Dyno Test",
+      "assignedTech": "Performance Tech Manoj K.",
+      "bay": "Bay 4 (Sports Bike Hydraulic Lift)",
+      "startTime": "Today, 09:30 AM",
+      "estimatedReady": "Today, 06:00 PM",
+      "notes": "ECU diagnostics clean. Dyno test in progress.",
+      "createdAt": "2026-09-10T15:00:17.750Z",
+      "updatedAt": "2026-09-10T21:27:12.872Z"
+    },
+    {
+      "id": "RC-1002",
+      "bike": "KTM Duke 390",
+      "reg": "RJ-14-KT-3900",
+      "customer": "Karan Mehra",
+      "phone": "+91 97841 88920",
+      "email": "karan.m@outlook.com",
+      "serviceType": "Free Doorstep Pickup",
+      "services": [
+        "Motul 300V Synthetic Oil Flush",
+        "Coolant Flush",
+        "ECU Diagnostic Scan"
+      ],
+      "total": 2498,
+      "stage": 3,
+      "status": "Active Servicing & Spares Replacement",
+      "assignedTech": "Performance Tech Manoj K.",
+      "bay": "Bay 4 (Sports Bike Hydraulic Lift)",
+      "startTime": "Today, 11:15 AM",
+      "estimatedReady": "Today, 05:45 PM",
+      "notes": "Old oil drained, oil filter swapped. Diagnostic ECU scanner connected.",
+      "createdAt": "2026-09-10T17:00:17.751Z",
+      "updatedAt": "2026-09-10T21:00:17.751Z"
+    },
+    {
+      "id": "RC-1003",
+      "bike": "Yamaha R15 V4",
+      "reg": "RJ-14-YA-8812",
+      "customer": "Rohit Sharma",
+      "phone": "+91 99281 33451",
+      "email": "rohit.r15@gmail.com",
+      "serviceType": "Workshop Drop-off",
+      "services": [
+        "Comprehensive Service",
+        "Foam Wash & Ceramic Wax",
+        "Front Brake Bleed"
+      ],
+      "total": 1747,
+      "stage": 5,
+      "status": "Ready for Pickup / Polished",
+      "assignedTech": "Tech Rajesh V.",
+      "bay": "Detailing Bay",
+      "startTime": "Today, 08:00 AM",
+      "estimatedReady": "Ready for Delivery",
+      "notes": "Completed all 40 quality checks. Vehicle washed and mirror polished. Ready for handover.",
+      "createdAt": "2026-09-10T14:00:17.751Z",
+      "updatedAt": "2026-09-10T21:00:17.751Z"
+    }
+  ],
+  "inquiries": [
+    {
+      "id": "INQ-101",
+      "name": "Mohit Agarwal",
+      "phone": "+91 98299 44321",
+      "bike": "Kawasaki Ninja 300",
+      "message": "Need full throttle body ultrasonic cleaning and tappet clearance adjustment.",
+      "status": "New",
+      "createdAt": "2026-09-10T19:00:17.751Z"
+    },
+    {
+      "id": "INQ-102",
+      "name": "Deepak Tanwar",
+      "phone": "+91 94140 55123",
+      "bike": "Himalayan 450",
+      "message": "Planning Ladakh trip, need full expedition pre-ride service and luggage rack inspection.",
+      "status": "Contacted",
+      "createdAt": "2026-09-10T16:00:17.751Z"
+    }
+  ],
+  "reviews": [
+    {
+      "id": "REV-1",
+      "name": "Rahul Mehta",
+      "bike": "KTM Duke 250",
+      "rating": 5,
+      "avatar": "assets/images/avatar_rahul.jpg",
+      "quote": "Excellent service! My bike feels brand new. Throttle response is crisp and gear shifts are buttery smooth. Highly recommended!",
+      "date": "2 days ago"
+    },
+    {
+      "id": "REV-2",
+      "name": "Priya Sharma",
+      "bike": "Royal Enfield Meteor 350",
+      "rating": 5,
+      "avatar": "assets/images/avatar_priya.jpg",
+      "quote": "Professional staff and genuine parts. Truly reliable! They sent me live photos during the inspection. Best service center in Jaipur.",
+      "date": "1 week ago"
+    },
+    {
+      "id": "REV-3",
+      "name": "Amit Verma",
+      "bike": "Yamaha MT-15",
+      "rating": 5,
+      "avatar": "assets/images/avatar_amit.jpg",
+      "quote": "Quick service, fair pricing and great customer support. The live job tracker kept me updated while I was at the office. Superb!",
+      "date": "2 weeks ago"
+    }
+  ]
+}

@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Velocity Motors | Workshop CMS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ===== Admin Design System ===== */
+    :root {
+      --admin-bg:        #07101f;
+      --admin-surface:   #0d1a2e;
+      --admin-card:      #111e35;
+      --admin-card-hover:#152240;
+      --admin-border:    rgba(255,255,255,0.07);
+      --admin-border-strong: rgba(0,210,255,0.25);
+      --admin-cyan:      #00d2ff;
+      --admin-cyan-glow: rgba(0,210,255,0.15);
+      --admin-orange:    #ff6b35;
+      --admin-green:     #22c55e;
+      --admin-red:       #ef4444;
+      --admin-amber:     #f59e0b;
+      --admin-text:      #e2e8f0;
+      --admin-muted:     #64748b;
+      --admin-label:     #94a3b8;
+      --admin-radius:    12px;
+      --admin-radius-lg: 16px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--admin-bg);
+      color: var(--admin-text);
+      min-height: 100vh;
+      font-size: 14px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ===== Layout ===== */
+    .admin-layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ===== Sidebar ===== */
+    .admin-sidebar {
+      width: 240px;
+      flex-shrink: 0;
+      background: var(--admin-surface);
+      border-right: 1px solid var(--admin-border);
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      position: fixed;
+      top: 0; left: 0;
+      height: 100vh;
+      z-index: 100;
+      transition: transform 0.3s ease;
+    }
+
+    .sidebar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 20px 20px 18px;
+      border-bottom: 1px solid var(--admin-border);
+    }
+
+    .sidebar-brand-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, rgba(0,210,255,0.2), rgba(255,107,53,0.2));
+      border: 1px solid rgba(0,210,255,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .sidebar-brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .sidebar-brand-name {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: #fff;
+      letter-spacing: 0.02em;
+    }
+
+    .sidebar-brand-sub {
+      font-size: 0.68rem;
+      color: var(--admin-muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .sidebar-nav {
+      padding: 16px 12px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      overflow-y: auto;
+    }
+
+    .sidebar-section-label {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--admin-muted);
+      padding: 10px 8px 4px;
+      font-weight: 600;
+    }
+
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: 8px;
+      color: var(--admin-label);
+      font-size: 0.88rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+    }
+
+    .sidebar-link:hover {
+      background: rgba(255,255,255,0.05);
+      color: var(--admin-text);
+    }
+
+    .sidebar-link.active {
+      background: var(--admin-cyan-glow);
+      color: var(--admin-cyan);
+      border: 1px solid rgba(0,210,255,0.15);
+    }
+
+    .sidebar-link .nav-icon {
+      width: 18px;
+      height: 18px;
+      opacity: 0.8;
+      flex-shrink: 0;
+    }
+
+    .sidebar-link .nav-badge {
+      margin-left: auto;
+      background: var(--admin-cyan);
+      color: #000;
+      font-size: 0.65rem;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 1px 7px;
+      min-width: 20px;
+      text-align: center;
+    }
+
+    .sidebar-footer {
+      padding: 16px 12px;
+      border-top: 1px solid var(--admin-border);
+      display: flex;
+      gap: 8px;
+    }
+
+    /* ===== Main Content ===== */
+    .admin-main {
+      margin-left: 240px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* ===== Top Bar ===== */
+    .admin-topbar {
+      background: var(--admin-surface);
+      border-bottom: 1px solid var(--admin-border);
+      padding: 14px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .topbar-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .topbar-subtitle {
+      font-size: 0.78rem;
+      color: var(--admin-muted);
+      margin-top: 1px;
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* ===== Admin Content Area ===== */
+    .admin-content {
+      padding: 28px;
+      flex: 1;
+    }
+
+    /* ===== Stats Grid ===== */
+    .admin-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .stat-card {
+      background: var(--admin-card);
+      border: 1px solid var(--admin-border);
+      border-radius: var(--admin-radius-lg);
+      padding: 20px 22px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      transition: border-color 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--stat-color, var(--admin-cyan));
+      opacity: 0.7;
+    }
+
+    .stat-card:hover {
+      border-color: var(--admin-border-strong);
+      transform: translateY(-2px);
+    }
+
+    .stat-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: var(--stat-color-bg, rgba(0,210,255,0.12));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .stat-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .stat-label {
+      font-size: 0.73rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--admin-muted);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .stat-value {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.65rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .stat-delta {
+      font-size: 0.72rem;
+      color: var(--admin-green);
+      margin-top: 4px;
+    }
+
+    /* ===== Panel / Card ===== */
+    .admin-panel {
+      background: var(--admin-card);
+      border: 1px solid var(--admin-border);
+      border-radius: var(--admin-radius-lg);
+      overflow: hidden;
+    }
+
+    .panel-header {
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--admin-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .panel-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .panel-subtitle {
+      font-size: 0.78rem;
+      color: var(--admin-muted);
+      margin-top: 2px;
+    }
+
+    .panel-body {
+      padding: 22px;
+    }
+
+    /* ===== Panes ===== */
+    .admin-pane { display: none; }
+    .admin-pane.active { display: block; }
+
+    /* ===== Table ===== */
+    .admin-table-wrap { overflow-x: auto; }
+
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .admin-table th {
+      padding: 11px 14px;
+      text-align: left;
+      font-size: 0.71rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--admin-muted);
+      border-bottom: 1px solid var(--admin-border);
+      white-space: nowrap;
+      background: rgba(0,0,0,0.12);
+    }
+
+    .admin-table td {
+      padding: 12px 14px;
+      font-size: 0.85rem;
+      color: var(--admin-text);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      vertical-align: top;
+    }
+
+    .admin-table tr:last-child td { border-bottom: none; }
+    .admin-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+    /* ===== Status Badges ===== */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .status-badge.received  { background: rgba(100,116,139,0.15); color: #94a3b8; border: 1px solid rgba(100,116,139,0.3); }
+    .status-badge.diagnosing{ background: rgba(245,158,11,0.12);  color: var(--admin-amber); border: 1px solid rgba(245,158,11,0.3); }
+    .status-badge.servicing { background: rgba(0,210,255,0.1);    color: var(--admin-cyan);  border: 1px solid rgba(0,210,255,0.3); }
+    .status-badge.ready     { background: rgba(34,197,94,0.12);   color: var(--admin-green); border: 1px solid rgba(34,197,94,0.3); }
+    .status-badge.delivered { background: rgba(255,255,255,0.06); color: #cbd5e1;            border: 1px solid rgba(255,255,255,0.1); }
+    .status-badge.published { background: rgba(34,197,94,0.12);   color: var(--admin-green); border: 1px solid rgba(34,197,94,0.3); }
+    .status-badge.pending   { background: rgba(245,158,11,0.12);  color: var(--admin-amber); border: 1px solid rgba(245,158,11,0.3); }
+
+    /* ===== Row Actions ===== */
+    .admin-row-actions {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    /* ===== Buttons ===== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 9px 18px;
+      border-radius: 8px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.18s ease;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #00d2ff, #0099cc);
+      color: #fff;
+    }
+    .btn-primary:hover { background: linear-gradient(135deg, #0099cc, #00d2ff); transform: translateY(-1px); }
+
+    .btn-sm {
+      padding: 5px 11px;
+      font-size: 0.77rem;
+      border-radius: 6px;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--admin-border-strong);
+      color: var(--admin-cyan);
+    }
+    .btn-outline:hover { background: var(--admin-cyan-glow); }
+
+    .btn-ghost {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--admin-border);
+      color: var(--admin-label);
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.1); color: var(--admin-text); }
+
+    .btn-danger {
+      background: rgba(239,68,68,0.12);
+      border: 1px solid rgba(239,68,68,0.3);
+      color: var(--admin-red);
+    }
+    .btn-danger:hover { background: rgba(239,68,68,0.22); }
+
+    .btn-success {
+      background: rgba(34,197,94,0.12);
+      border: 1px solid rgba(34,197,94,0.3);
+      color: var(--admin-green);
+    }
+    .btn-success:hover { background: rgba(34,197,94,0.22); }
+
+    /* ===== Form Styles ===== */
+    .form-group { margin-bottom: 16px; }
+
+    .form-label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--admin-label);
+      margin-bottom: 6px;
+      letter-spacing: 0.02em;
+    }
+
+    .form-input, .form-textarea, .form-select {
+      width: 100%;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid var(--admin-border);
+      border-radius: 8px;
+      color: var(--admin-text);
+      padding: 9px 12px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.88rem;
+      transition: border-color 0.18s, background 0.18s;
+      outline: none;
+    }
+
+    .form-input:focus, .form-textarea:focus, .form-select:focus {
+      border-color: rgba(0,210,255,0.5);
+      background: rgba(0,210,255,0.04);
+    }
+
+    .form-textarea { resize: vertical; min-height: 80px; }
+
+    .admin-form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .admin-form-grid .full { grid-column: 1 / -1; }
+
+    /* ===== Login ===== */
+    .admin-login-wrap {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: var(--admin-bg);
+    }
+
+    .admin-login-card {
+      width: 100%;
+      max-width: 400px;
+      background: var(--admin-card);
+      border: 1px solid var(--admin-border);
+      border-radius: var(--admin-radius-lg);
+      padding: 36px;
+    }
+
+    .login-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .login-logo-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(0,210,255,0.2), rgba(255,107,53,0.2));
+      border: 1px solid rgba(0,210,255,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+    }
+
+    .login-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .login-subtitle {
+      font-size: 0.82rem;
+      color: var(--admin-muted);
+    }
+
+    .admin-message {
+      min-height: 1.2em;
+      font-size: 0.83rem;
+      color: #fca5a5;
+      margin-bottom: 14px;
+    }
+    .admin-message.success { color: #86efac; }
+
+    /* ===== Divider ===== */
+    .divider {
+      height: 1px;
+      background: var(--admin-border);
+      margin: 24px 0;
+    }
+
+    /* ===== Hidden ===== */
+    .hidden { display: none !important; }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 900px) {
+      .admin-sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 1000;
+        width: 260px;
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: 10px 0 30px rgba(0,0,0,0.5);
+      }
+      .admin-sidebar.open {
+        transform: translateX(0);
+      }
+      .admin-main {
+        margin-left: 0;
+        width: 100%;
+      }
+      .admin-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      .admin-form-grid {
+        grid-template-columns: 1fr;
+      }
+      .admin-form-grid .full {
+        grid-column: auto;
+      }
+      .admin-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .admin-sidebar-toggle {
+        display: flex !important;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .admin-topbar {
+        padding: 12px 16px;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .admin-stats-grid {
+        grid-template-columns: 1fr;
+      }
+      .admin-content {
+        padding: 14px;
+      }
+      .stat-card {
+        padding: 14px;
+      }
+      .pane-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+    }
+
+    /* ===== Section header ===== */
+    .pane-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      gap: 12px;
+    }
+
+    .pane-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .pane-sub {
+      font-size: 0.78rem;
+      color: var(--admin-muted);
+      margin-top: 2px;
+    }
+
+    /* ===== Section Divider ===== */
+    .section-gap { margin-top: 24px; }
+
+    /* ===== Empty state ===== */
+    .empty-table-row td {
+      text-align: center;
+      color: var(--admin-muted);
+      padding: 40px !important;
+      font-size: 0.88rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== LOGIN VIEW ===== -->
+  <div class="admin-login-wrap" id="loginView">
+    <div class="admin-login-card">
+      <div class="login-logo">
+        <div class="login-logo-icon" style="display:flex;align-items:center;justify-content:center;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H7c-.6 0-1.1.2-1.4.7L3.5 10C2.7 10.2 2 11 2 11.9V16c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="3"/><circle cx="17" cy="17" r="3"/><path d="M9 9h4"/></svg>
+        </div>
+        <div>
+          <div class="login-title">Workshop CMS</div>
+          <div class="login-subtitle">Velocity Motors</div>
+        </div>
+      </div>
+      <p style="font-size:0.88rem;color:#94a3b8;margin-bottom:24px;">Sign in to manage live site content, bookings, and service jobs.</p>
+      <form id="loginForm">
+        <div class="form-group">
+          <label class="form-label" for="loginUsername">Username</label>
+          <input class="form-input" id="loginUsername" autocomplete="username" placeholder="admin" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="loginPassword">Password</label>
+          <input class="form-input" id="loginPassword" type="password" autocomplete="current-password" placeholder="••••••••" required>
+        </div>
+        <p id="loginMessage" class="admin-message" role="alert"></p>
+        <button class="btn btn-primary" type="submit" style="width:100%;padding:11px;">Sign in →</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== DASHBOARD VIEW ===== -->
+  <div class="admin-layout hidden" id="dashboardView">
+
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-brand">
+        <div class="sidebar-brand-icon" style="display:flex;align-items:center;justify-content:center;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H7c-.6 0-1.1.2-1.4.7L3.5 10C2.7 10.2 2 11 2 11.9V16c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="3"/><circle cx="17" cy="17" r="3"/><path d="M9 9h4"/></svg>
+        </div>
+        <div class="sidebar-brand-text">
+          <span class="sidebar-brand-name">VELOCITY MOTORS</span>
+          <span class="sidebar-brand-sub">Workshop CMS</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="CMS navigation">
+        <span class="sidebar-section-label">Operations</span>
+        <button class="sidebar-link active" data-pane="jobs">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="m9 12 2 2 4-4"/></svg>
+          Service Jobs
+        </button>
+        <button class="sidebar-link" data-pane="inquiries">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Inquiries
+        </button>
+
+        <span class="sidebar-section-label" style="margin-top:8px;">Content</span>
+        <button class="sidebar-link" data-pane="reviews">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Reviews
+        </button>
+        <button class="sidebar-link" data-pane="services">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          Services
+        </button>
+        <button class="sidebar-link" data-pane="settings">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          Site Settings
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a class="btn btn-ghost btn-sm" href="/" target="_blank" rel="noopener" style="flex:1;justify-content:center;">↗ View site</a>
+        <button class="btn btn-ghost btn-sm" id="logoutButton" type="button">Sign out</button>
+      </div>
+    </aside>
+
+    <!-- Main Area -->
+    <main class="admin-main">
+
+      <!-- Topbar -->
+      <header class="admin-topbar">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <button class="btn btn-ghost btn-sm admin-sidebar-toggle" id="adminSidebarToggle" type="button" style="display:none; padding:8px 10px;" aria-label="Toggle Navigation">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          </button>
+          <div>
+            <div class="topbar-title" id="adminTopbarTitle">Service Jobs</div>
+            <div class="topbar-subtitle" id="adminWelcome">Manage live site content, rider requests, and service jobs.</div>
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <span style="font-size:0.8rem;color:var(--admin-muted);" id="adminUserLabel"></span>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <div class="admin-content">
+
+        <!-- Stats -->
+        <div class="admin-stats-grid">
+          <article class="stat-card" style="--stat-color:#00d2ff;--stat-color-bg:rgba(0,210,255,0.12);">
+            <div class="stat-icon" style="display:flex;align-items:center;justify-content:center;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg>
+            </div>
+            <div class="stat-info">
+              <div class="stat-label">Total Jobs</div>
+              <div class="stat-value" id="statTotalJobs">0</div>
+            </div>
+          </article>
+          <article class="stat-card" style="--stat-color:#f59e0b;--stat-color-bg:rgba(245,158,11,0.12);">
+            <div class="stat-icon" style="display:flex;align-items:center;justify-content:center;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            </div>
+            <div class="stat-info">
+              <div class="stat-label">In Servicing</div>
+              <div class="stat-value" id="statInServicing">0</div>
+            </div>
+          </article>
+          <article class="stat-card" style="--stat-color:#22c55e;--stat-color-bg:rgba(34,197,94,0.12);">
+            <div class="stat-icon" style="display:flex;align-items:center;justify-content:center;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div class="stat-info">
+              <div class="stat-label">Ready for Pickup</div>
+              <div class="stat-value" id="statReady">0</div>
+            </div>
+          </article>
+          <article class="stat-card" style="--stat-color:#ff6b35;--stat-color-bg:rgba(255,107,53,0.12);">
+            <div class="stat-icon" style="display:flex;align-items:center;justify-content:center;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <div class="stat-info">
+              <div class="stat-label">Today's Revenue</div>
+              <div class="stat-value" id="statRevenue">₹0</div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Alert message -->
+        <p id="dashboardMessage" class="admin-message" role="status" style="margin-bottom:16px;"></p>
+
+        <!-- ===== JOBS PANE ===== -->
+        <section class="admin-pane active" id="pane-jobs">
+          <div class="admin-panel">
+            <div class="panel-header">
+              <div>
+                <div class="panel-title">Service Job Cards</div>
+                <div class="panel-subtitle">All booked and active service jobs</div>
+              </div>
+            </div>
+            <div class="admin-table-wrap">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Job</th>
+                    <th>Rider</th>
+                    <th>Bike</th>
+                    <th>Stage</th>
+                    <th>Workshop Update</th>
+                    <th>Bill</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="bookingsTableBody">
+                  <tr class="empty-table-row"><td colspan="7">Loading job cards…</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== INQUIRIES PANE ===== -->
+        <section class="admin-pane" id="pane-inquiries">
+          <div class="admin-panel">
+            <div class="panel-header">
+              <div>
+                <div class="panel-title">Customer Inquiries</div>
+                <div class="panel-subtitle">Messages sent from the contact form</div>
+              </div>
+            </div>
+            <div class="admin-table-wrap">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Rider</th>
+                    <th>Phone</th>
+                    <th>Bike</th>
+                    <th>Message</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="inquiriesTableBody">
+                  <tr class="empty-table-row"><td colspan="6">Loading inquiries…</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== REVIEWS PANE ===== -->
+        <section class="admin-pane" id="pane-reviews">
+          <div class="admin-panel">
+            <div class="panel-header">
+              <div>
+                <div class="panel-title">Customer Reviews</div>
+                <div class="panel-subtitle">Published reviews appear on the public site</div>
+              </div>
+            </div>
+            <div class="admin-table-wrap">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Rider</th>
+                    <th>Bike</th>
+                    <th>Rating</th>
+                    <th>Review</th>
+                    <th>Publication</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="reviewsTableBody">
+                  <tr class="empty-table-row"><td colspan="6">Loading reviews…</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== SERVICES PANE ===== -->
+        <section class="admin-pane" id="pane-services">
+          <!-- Add/Edit Service Form -->
+          <div class="admin-panel" style="margin-bottom:24px;">
+            <div class="panel-header">
+              <div>
+                <div class="panel-title" id="serviceFormTitle">Add New Service</div>
+                <div class="panel-subtitle">Fill in the details for the service card on the public site</div>
+              </div>
+            </div>
+            <div class="panel-body">
+              <form id="serviceForm">
+                <input id="serviceEditSlug" type="hidden">
+                <div class="admin-form-grid">
+                  <div>
+                    <label class="form-label">Slug</label>
+                    <input class="form-input" id="serviceSlug" required placeholder="e.g. electrical">
+                  </div>
+                  <div>
+                    <label class="form-label">Card Title</label>
+                    <input class="form-input" id="serviceTitle" required placeholder="e.g. Electrical Repair">
+                  </div>
+                  <div>
+                    <label class="form-label">Detail Title</label>
+                    <input class="form-input" id="serviceDetailTitle" placeholder="Full title for detail view">
+                  </div>
+                  <div>
+                    <label class="form-label">Icon (emoji)</label>
+                    <input class="form-input" id="serviceIcon" placeholder="wrench">
+                  </div>
+                  <div>
+                    <label class="form-label">Starting Price (₹)</label>
+                    <input class="form-input" id="servicePrice" type="number" min="0" required placeholder="999">
+                  </div>
+                  <div>
+                    <label class="form-label">Duration</label>
+                    <input class="form-input" id="serviceDuration" placeholder="e.g. 2-3 hours">
+                  </div>
+                  <div>
+                    <label class="form-label">Service Interval</label>
+                    <input class="form-input" id="serviceInterval" placeholder="e.g. Every 5,000 km">
+                  </div>
+                  <div>
+                    <label class="form-label">Sort Order</label>
+                    <input class="form-input" id="serviceSortOrder" type="number" min="0" placeholder="0">
+                  </div>
+                  <div class="full">
+                    <label class="form-label">Image URL or local path</label>
+                    <input class="form-input" id="serviceImageUrl" required placeholder="assets/images/about_mechanic.jpg">
+                  </div>
+                  <div class="full">
+                    <label class="form-label">Image Alt Text</label>
+                    <input class="form-input" id="serviceAltText" required placeholder="Descriptive alt text">
+                  </div>
+                  <div class="full">
+                    <label class="form-label">Short Description</label>
+                    <textarea class="form-textarea" id="serviceDescription" required rows="2" placeholder="Brief description shown on the service card"></textarea>
+                  </div>
+                  <div class="full">
+                    <label class="form-label">Included Items <span style="color:var(--admin-muted);font-weight:400;">(one per line)</span></label>
+                    <textarea class="form-textarea" id="serviceInclusions" rows="6" placeholder="40-point inspection&#10;Engine oil change&#10;Air filter cleaning"></textarea>
+                  </div>
+                </div>
+                <div class="admin-row-actions" style="margin-top:20px;">
+                  <button class="btn btn-primary" type="submit">Save service</button>
+                  <button class="btn btn-ghost" type="button" id="cancelServiceEdit">Clear form</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Services Table -->
+          <div class="admin-panel">
+            <div class="panel-header">
+              <div>
+                <div class="panel-title">All Services</div>
+                <div class="panel-subtitle">Published services appear on the public site</div>
+              </div>
+            </div>
+            <div class="admin-table-wrap">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Service</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                    <th>Image</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="servicesTableBody">
+                  <tr class="empty-table-row"><td colspan="5">Loading services…</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===== SETTINGS PANE ===== -->
+        <section class="admin-pane" id="pane-settings">
+          <div class="admin-panel">
+            <div class="panel-header">
+              <div>
+                <div class="panel-title">Public Site Settings</div>
+                <div class="panel-subtitle">These values appear directly on the public-facing website</div>
+              </div>
+            </div>
+            <div class="panel-body">
+              <form id="settingsForm">
+                <div class="admin-form-grid">
+                  <div>
+                    <label class="form-label">Business Name</label>
+                    <input class="form-input" id="settingBusinessName" required placeholder="Velocity Motors">
+                  </div>
+                  <div>
+                    <label class="form-label">Phone</label>
+                    <input class="form-input" id="settingPhone" placeholder="+91 98765 43210">
+                  </div>
+                  <div>
+                    <label class="form-label">Email</label>
+                    <input class="form-input" id="settingEmail" type="email" placeholder="hello@velocitymotors.in">
+                  </div>
+                  <div>
+                    <label class="form-label">Google Maps URL</label>
+                    <input class="form-input" id="settingMapUrl" type="url" placeholder="https://maps.google.com/...">
+                  </div>
+                  <div class="full">
+                    <label class="form-label">Hero Description</label>
+                    <textarea class="form-textarea" id="settingHeroLead" rows="3" placeholder="Professional bike servicing..."></textarea>
+                  </div>
+                  <div class="full">
+                    <label class="form-label">Address</label>
+                    <textarea class="form-textarea" id="settingAddress" rows="2" placeholder="123 Workshop Lane, Jaipur, Rajasthan"></textarea>
+                  </div>
+                  <div>
+                    <label class="form-label">Weekday Hours</label>
+                    <input class="form-input" id="settingWeekdayHours" placeholder="Mon–Sat, 8 AM – 7 PM">
+                  </div>
+                  <div>
+                    <label class="form-label">Weekend Hours</label>
+                    <input class="form-input" id="settingWeekendHours" placeholder="Sun, 9 AM – 4 PM">
+                  </div>
+                  <div>
+                    <label class="form-label">Emergency Hours</label>
+                    <input class="form-input" id="settingEmergencyHours" placeholder="24/7 SOS Breakdown">
+                  </div>
+                  <div>
+                    <label class="form-label">Doorstep Pickup Fee (₹)</label>
+                    <input class="form-input" id="settingPickupFee" type="number" min="0" placeholder="199">
+                  </div>
+                </div>
+                <div style="margin-top:20px;">
+                  <button class="btn btn-primary" type="submit">Save site settings</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+
+      </div><!-- /admin-content -->
+    </main>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/admin.js"></script>
+  <script>
+    // Mobile sidebar toggle
+    document.getElementById('adminSidebarToggle')?.addEventListener('click', () => {
+      document.querySelector('.admin-sidebar')?.classList.toggle('open');
+    });
+
+    // Sidebar tab switching with topbar title update
+    const paneNames = {
+      jobs: 'Service Jobs',
+      inquiries: 'Customer Inquiries',
+      reviews: 'Customer Reviews',
+      services: 'Services',
+      settings: 'Site Settings'
+    };
+
+    document.querySelectorAll('.sidebar-link[data-pane]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const pane = btn.dataset.pane;
+        document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.admin-pane').forEach(p => p.classList.remove('active'));
+        document.getElementById('pane-' + pane)?.classList.add('active');
+        const titleEl = document.getElementById('adminTopbarTitle');
+        if (titleEl) titleEl.textContent = paneNames[pane] || pane;
+        document.querySelector('.admin-sidebar')?.classList.remove('open');
+      });
+    });
+  </script>
+</body>
+</html>
